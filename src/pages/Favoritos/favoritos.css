@@ -1,0 +1,37 @@
+.mainDiv{
+   
+    width: 100%;
+    
+   
+    
+    max-width: 2500px;
+    
+    align-items: center;
+    
+    justify-content: space-between;
+    
+}
+
+
+
+
+
+.mainDiv article a{
+    text-decoration: none;
+    color: #FFF;
+    font-size: 25px;
+    background-color: brown;
+    width: 100%;
+    height: 40px;
+    margin-top: -30px;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; 
+}
+
+img{
+    max-height: 350px;
+    width: 200px;  
+    padding: 10px;
+  }
+

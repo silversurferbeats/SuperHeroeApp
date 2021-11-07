@@ -1,0 +1,36 @@
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 2400px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color:#2b2c2d;
+    justify-content: space-between;
+}
+
+
+.detailsheroi article{
+ display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 15px;
+    padding: 15px; 
+    border-radius: 5px;
+    justify-content: space-between;
+
+}
+
+
+
+
+.detailsheroi img{
+    max-height: 350px;
+    width: 400px;  
+  }
+
+  
+
