@@ -1,5 +1,5 @@
 import React, { Component }from 'react';
-import { NavItem, Form, Col, Button, Container, Row, Card} from 'react-bootstrap';
+import { Col, Container, Row, Card} from 'react-bootstrap';
 
 class Work extends Component{
 

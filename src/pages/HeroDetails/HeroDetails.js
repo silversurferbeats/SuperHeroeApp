@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavItem, Form, Col, Button, Container, Row, Card} from 'react-bootstrap';
+import { Form, Col, Container, } from 'react-bootstrap';
 
 import './heroDetails.css';
 import Biography from './biography';
@@ -7,11 +7,9 @@ import Powerstats from './powerstats';
 import Connections from './connections';
 import Appearance from './appearance';
 import Work from './work';
-import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 
 class HeroDetalis extends Component{
-
     constructor(props){
         super(props);
         this.state = {

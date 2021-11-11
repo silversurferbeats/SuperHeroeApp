@@ -1,5 +1,5 @@
 import React, { Component }from 'react';
-import {Link, withRouter} from 'react-router-dom'; // withRouter dá possibilidade de acesso ao histórico
+import { withRouter } from 'react-router-dom'; // withRouter dá possibilidade de acesso ao histórico
 import firebase from '../../firebase'
 import './Register.css'
 

@@ -1,15 +1,10 @@
 import React, { Component }from 'react';
 import {Link, withRouter} from 'react-router-dom'; 
 import Switch from 'react-switch'; // cria o botão para mudar de tema
-import {ThemeContext} from 'styled-components';
 import './header.css'
 import {ContainerHeader} from './styles';
 import File from '../../Marvel.jpg';
 import firebase from '../../firebase';
-import GlobalStyleDark from '../../styles/globalDark';
-import globalDark from '../../styles/globalDark';
-
-
 
 class Header extends Component{
 

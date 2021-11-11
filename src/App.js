@@ -1,8 +1,7 @@
 import React, { Component }from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from './firebase'
-import dark from './styles/dark'
 import GlobalStyleDark from './styles/globalDark';
 import GlobalStylelight from './styles/globalLight';
 
@@ -13,6 +12,7 @@ import Favoritos from './pages/Favoritos/Favoritos';
 import HeroDetails from './pages/HeroDetails/HeroDetails';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+
 
 
 class App extends Component{
@@ -88,12 +88,13 @@ class App extends Component{
     console.log('tema: ', this.state.tema);
     }
 
+   
 
   render(){
 
+
   return this.state.firebaseInitialized !== false? (
     <BrowserRouter>
-           
            {this.state.tema === true? <GlobalStylelight/> : <GlobalStyleDark/>}
            <Header alterarTheme={this.alterarTheme.bind(this)} background={this.state.background}/>
             <Switch>
@@ -102,8 +103,6 @@ class App extends Component{
                 <Route exact path="/favoritos" component={Favoritos}/>
                 <Route exact path="/HeroDetails/:id" component={HeroDetails}/>
                 <Route exact path="/register" component={Register}/>
-
-
             </Switch>
         </BrowserRouter>
   ):(

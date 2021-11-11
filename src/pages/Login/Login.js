@@ -1,3 +1,4 @@
+import { createBrowserHistory } from "history";
 import React, { Component }from 'react';
 import {Link, withRouter} from 'react-router-dom'; // withRouter proporciona acceso al historial
 //import firebase from '../../firebase'
@@ -5,6 +6,8 @@ import './login.css'
 import axios from 'axios';
 import Cookies from 'universal-cookie'; 
 const cookies = new Cookies();
+
+
 
 
 // API del login
@@ -15,7 +18,7 @@ export const API_ACCESS_TOKEN = '4280760198639854';
 
 export const API_FULL_DOMAIN = `${API_PROTOCOL}${API_DOMAIN}${API_ACCESS_TOKEN}`;
 
-export const API_AUTH_DOMAIN = 'http://challenge-react.alkemy.org/';
+export const API_AUTH_DOMAIN = 'http://challenge-react.alkemy.org';
 
 
 
@@ -34,43 +37,47 @@ class Login extends Component{
                 [e.target.name]: e.target.value
             }
         });
-        console.log(this.state.form);
     }
 
     iniciarSesion = async(e) =>{
         e.preventDefault();
 
         const payload = {email: this.state.form.email, password: this.state.form.password};
-
-        await axios.post (API_AUTH_DOMAIN, payload)
+        console.log(this.state.form);
+        await axios.post(API_AUTH_DOMAIN, payload)
         .then(response => {
-            return console.log(response.data);
+            console.log(response);
+            return response.data;
         })
         .then (response=>{
             console.log('response', response);
             localStorage.setItem('token', response.token);
-            window.location.href='./Welcome';
+            window.location.href='./welcome';
         })
         .catch(error => {
             alert('el usuario no es correcto');
-            console.log(error);
+            console.log(error.response);
         })
-    }
+        
+        
+    } 
 
+    
     componentDidMount() {
-        if(cookies.get('username')) {
-            window.location.href='./menu';
+        if(cookies.get('welcome')) {
+            window.location.href='./welcome';
         }
     }
+    
 
     render(){
         return(
             <div>
-                {console.log("llegue => Login!")}
                 <form onSubmit={this.iniciarSesion} id="login">
                     <label>Email:</label><br/>
                     <input 
                         type="email" 
+                        name='email'
                         autoComplete="off" 
                         autoFocus 
                         value={this.state.email}
@@ -80,6 +87,7 @@ class Login extends Component{
                     <label>Password:</label><br/>
                     <input 
                         type="password" 
+                        name='password'
                         autoComplete="off" 
                         value={this.state.password}
                         onChange={this.handleChange} 

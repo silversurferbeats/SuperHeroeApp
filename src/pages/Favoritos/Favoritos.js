@@ -1,5 +1,5 @@
 import React, { Component }from 'react';
-import { NavItem, Form, Col, Button, Container, Row, Card} from 'react-bootstrap';
+import { Col, Button, Container, Row, Card} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner'
 import {Link} from 'react-router-dom';
 import './favoritos.css';

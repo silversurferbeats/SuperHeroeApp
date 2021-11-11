@@ -1,25 +1,16 @@
 import React, { Component }from 'react';
-import { NavItem, Form, Col, Button, Container, Row, Card} from 'react-bootstrap';
+import { Col, Container, Row, Card} from 'react-bootstrap';
 
 class Powerstats extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-          
             list:this.props.list,
-            
         }
-       
-        
-        
     }
-
-    
-
-    
+ 
     render(){
-        
         return(
             <Container id="Powerstats">
 
@@ -28,9 +19,6 @@ class Powerstats extends Component{
                   <Col>
                     <Card style={{ marginLeft: '-3.1rem', width: '75rem', border:'#fff', background:'transparent', justifyContent: 'space-between' }}>
                       <Card.Title style={{  fontSize: '25px',textAlign: 'left',marginTop: '.5rem',  color: '#f70606' }}>Powerstats</Card.Title>
-                      
-
-                      
                       <Card.Body>
                       <Row style={{color:'#fff'}}>
                   <Col >

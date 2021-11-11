@@ -1,36 +1,21 @@
 import React, { Component }from 'react';
-import { NavItem, Form, Col, Button, Container, Row, Card} from 'react-bootstrap';
+import { Col, Container, Row, Card} from 'react-bootstrap';
 
 class Biography extends Component{
-
     constructor(props){
         super(props);
         this.state = {
-            
             list:this.props.list,
-            
         }
-       
-        
-        
     }
-
-    
-
-    
+ 
     render(){
-        
         return(
             <Container id="Biography">
-                
-                
-
               <Row>
-                  
                   <Col>
                     <Card style={{ marginLeft: '-3.1rem', width: '75rem', border:'#fff', background:'transparent', justifyContent: 'space-between' }}>
                       <Card.Title style={{  fontSize: '25px',textAlign: 'left',marginTop: '.5rem',  color: '#f70606' }}>Biography</Card.Title>
-                    
                       <Card.Body style={{color:'#fff'}}>
                       
                         <Col xs="auto" className="my-1" >

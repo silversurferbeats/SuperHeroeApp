@@ -1,5 +1,5 @@
 import React, { Component }from 'react';
-import { NavItem, Form, Col, Button, Container, Row, Card} from 'react-bootstrap';
+import { Col, Container, Row, Card} from 'react-bootstrap';
 
 class Appearance extends Component{
 
@@ -14,25 +14,14 @@ class Appearance extends Component{
             listHeroes:[],
             loading: true,
             list:this.props.list,
-            
         }
-       
-        
-        
     }
 
-    
-
-    
     render(){
-        
         return(
             <Container id='Appearance'>
-                            
-
               <Row>
-                  
-                  <Col>
+                 <Col>
                     <Card style={{ marginLeft: '-3.1rem', width: '75rem', border:'#fff', background:'transparent', justifyContent: 'space-between' }}>
                       <Card.Title style={{  fontSize: '25px',textAlign: '',marginTop: '.5rem',  color: '#f70606' }}>Aparienvcia</Card.Title>
                       
