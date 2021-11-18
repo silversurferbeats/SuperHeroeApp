@@ -26,55 +26,36 @@ class Header extends Component{
             this.props.history.replace('/');
             return null;
         }
-
         firebase.getUserName((info)=>{
-            
             localStorage.nome = info.val().nome;
             this.setState({name: localStorage.nome});
         })
-
         let themeGet = JSON.parse(localStorage.getItem('tema'));
-    
-    
         this.setState({tema: themeGet})
-
-
-    
 }
-
 
     getTema (){
         let themeGet = JSON.parse(localStorage.getItem('tema'));
         console.log('themeGet: ', themeGet);
         if(themeGet=== null|| themeGet ==='null'){
-        
-        this.setState({tema:false})
-        
-        }else{
-            if (themeGet) {
-        this.setState({tema:themeGet})
-        }else{
             this.setState({tema:false})
+        } else {
+            if (themeGet) {
+                this.setState({tema:themeGet})
+            } else {
+                this.setState({tema:false})
+            }
         }
-
-        }
-
         this.props.alterarTheme();
-
-
     }
 
-    async logout ()  {
-       
+    async logout() {
         await  firebase.logout()
-        .catch((error)=>{
-            console.log(error);
-        });
+        .catch(error => console.log(error));
         localStorage.removeItem("nome");
         localStorage.removeItem('tema');//remover nome salvo no localstorage
         this.props.history.replace('/');
-       
-  }
+    }
 
  
   render(){
