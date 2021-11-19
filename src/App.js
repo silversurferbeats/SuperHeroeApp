@@ -1,7 +1,7 @@
 import React, { Component }from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import firebase from './firebase'
+import firebase from './firebase';
 import GlobalStyleDark from './styles/globalDark';
 import GlobalStylelight from './styles/globalLight';
 
@@ -18,15 +18,15 @@ import Register from './pages/Register/Register';
 class App extends Component{
   constructor(props){
     super(props);
-  this.state={
+    this.state={
     firebaseInitialized: false,
     tema:localStorage.tema,
+    token: localStorage.token,
     background:  localStorage.background
-  };
-  this.alterarTheme = this.alterarTheme.bind(this);
-  this.getTema = this.getTema.bind(this);
-
-}
+    };
+    this.alterarTheme = this.alterarTheme.bind(this);
+    this.getTema = this.getTema.bind(this);
+  }
   
   componentDidMount(){
     firebase.isInitialized().then(resultado => {
@@ -34,12 +34,16 @@ class App extends Component{
         firebaseInitialized: resultado
       });
     })
-    
     this.getTema();
-
   }
-
+  
   getTema(){
+    let tokenGet = localStorage.getItem('token');
+    if(!tokenGet) {
+      window.location.href='./';
+    };
+
+    
     let themeGet = JSON.parse(localStorage.getItem('tema'));
     console.log('themeGet: ', themeGet);
     if(themeGet=== null|| themeGet ==='null'){
@@ -71,10 +75,6 @@ class App extends Component{
        localStorage.setItem('tema', JSON.stringify(false));
        localStorage.setItem('background', JSON.stringify('#333'));
        this.setState({tema:false,background:'#333'});
-       
-       
-    
-            
     } else{
         localStorage.setItem('tema', JSON.stringify(true));
         localStorage.setItem('background', JSON.stringify('#800404'));
@@ -93,22 +93,27 @@ class App extends Component{
   render(){
 
 
-  return this.state.firebaseInitialized !== false? (
+  return this.state.firebaseInitialized !== false ? (
     <BrowserRouter>
-           {this.state.tema === true? <GlobalStylelight/> : <GlobalStyleDark/>}
-           <Header alterarTheme={this.alterarTheme.bind(this)} background={this.state.background}/>
-            <Switch>
-                <Route exact path="/" component={Login}/>
-                <Route exact path="/welcome" component={Welcome}/>
-                <Route exact path="/favoritos" component={Favoritos}/>
-                <Route exact path="/HeroDetails/:id" component={HeroDetails}/>
-                <Route exact path="/register" component={Register}/>
-            </Switch>
-        </BrowserRouter>
+        {this.state.tema === true? <GlobalStylelight/> : <GlobalStyleDark/>}
+        <Header alterarTheme={this.alterarTheme.bind(this)} background={this.state.background}/>
+        <Switch>
+            <Route exact path="/" component={Login}/>
+            <Route exact path="/welcome" component={Welcome}/>
+            <Route exact path="/favoritos" component={Favoritos}/>
+            <Route exact path="/HeroDetails/:id" component={HeroDetails}/>
+            <Route exact path="/register" component={Register}/>
+        </Switch>
+    </BrowserRouter>
   ):(
-    <h1>Cargando...</h1>
+    <h1>Cargando1...</h1>
   )
 }
 }
 
+
+
 export default App;
+
+
+

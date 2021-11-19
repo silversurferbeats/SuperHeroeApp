@@ -8,6 +8,11 @@ import firebase from '../../firebase'
 import { PageActions } from './WelcomoStyles'
 
 class Welcome extends Component{
+    componentDidMount() {
+      if(!localStorage.getItem('token')) {
+          window.location.href='./login';
+      };
+    }                                                                                                                                                               
 
     constructor(props){
         super(props);
@@ -21,8 +26,7 @@ class Welcome extends Component{
             color:'',
             page:1,
             teste:'',
-            loading:true,
-            
+            loading:false,
         }
         this.listAllHeroes = this.listAllHeroes.bind(this);
         this.searchSuperHeroes = this.searchSuperHeroes.bind(this);
@@ -30,10 +34,13 @@ class Welcome extends Component{
         this.mudarPagina = this.mudarPagina.bind(this);
     }
 
-    /*
+    
+    
+
+    
     componentDidMount(){
       if(!firebase.getCurrent()){
-        alert('Estoy en Welcome');
+        alert('Bienvenidos');
         // this.props.history.replace('/');
       }
 
@@ -55,7 +62,7 @@ class Welcome extends Component{
         this.setState({color:'#800404'})
       }
     }
-    */
+   
     mudarPagina=(e)=>{
       let page1 = this.state.page;
       if(e === 'back'){page1 =  page1 - 1 }else{page1= page1 + 1} ;
@@ -63,16 +70,19 @@ class Welcome extends Component{
     }
 
     listAllHeroes = async(e) => {
-      this.setState({loading:true});
+        this.setState({loading:true});
         let listHeroes = [];
         let page1=1;
         let total=1;
+        
         if(e>=1){
           page1=e;
            total = page1*12;
         }else{total=12}
+
         console.log('page12:',e);
         console.log('total',total);
+        
         for(let i = total-11; i <= total; i++){
           const response = await fetch(`https://www.superheroapi.com/api.php/4280760198639854/${i}`);
           const data = await response.json();
@@ -99,7 +109,7 @@ class Welcome extends Component{
         this.setState({begin:0});
         this.setState({allHerois:data.results, buttonPesquisar:false, page:1, loading:false});
       }
-
+      
       addFavoritos =async(e) => {
         console.log('e', e);
         try{
@@ -111,6 +121,7 @@ class Welcome extends Component{
           alert(error.message);
         }
       }
+    
 
     render(){
 
@@ -148,61 +159,57 @@ class Welcome extends Component{
                       </Link>
                       
                       <Card.Body>
-                        
                         <Button variant="primary" onClick={(e)=> this.addFavoritos(item.id)}
                         style={{marginLeft: '-.7rem', backgroundColor: '#2b2c2d',borderColor:'#2b2c2d', boxShadow:'none'}}>
                           Añadir a los favoritos
                           </Button>
                       </Card.Body>
                     </Card>
-                    
                   </Col>
-        
-              ))}
+                ))}
               </Row>
             </div>
             {this.state.buttonPesquisar ?
-            <PageActions>
-          <button 
-          type="button" 
-          onClick={()=> this.mudarPagina('back')  }
-          disabled={this.state.page < 2}
-          >
-            Página Anterior
-          </button>
-          
-          <button 
-          type="button" 
-          onClick={()=> this.mudarPagina('next') }
-          >
-            Proxima Página
-          </button>
-        </PageActions>
-    :console.log()}
+              <PageActions>
+                <button 
+                type="button" 
+                onClick={()=> this.mudarPagina('back')  }
+                disabled={this.state.page < 2}
+                >
+                  Página Anterior
+                </button>
+                
+                <button 
+                type="button" 
+                onClick={()=> this.mudarPagina('next') }
+                >
+                  Proxima Página
+                </button>
+              </PageActions>
+            :console.log()
+            }
           </Container>
-          ):
-         ( <div
-              style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "40px",
-                      width: "100%",
-                      marginTop: "30px",
-                      position: 'absolute',
-                      left: '50%',
-                      top: '50%',
-                      transform: 'translate(-50%, -50%)',
-                    }}
-            >
-              <Spinner animation="border" role="status" variant='danger'>
-                <span className="sr-only">Loading...</span>
-              </Spinner>
+          ): (
+          <div
+            style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "40px",
+            width: "100%",
+            marginTop: "30px",
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            }}>
+            <Spinner animation="border" role="status" variant='danger'>
+              <span className="sr-only">Loading...</span>
+            </Spinner>
           </div>
          )
         );
     }
 }
-
 
 export default Welcome;

@@ -1,13 +1,12 @@
-import { createBrowserHistory } from "history";
 import React, { Component }from 'react';
-import {Link, withRouter} from 'react-router-dom'; // withRouter proporciona acceso al historial
-//import firebase from '../../firebase'
+import {Link} from 'react-router-dom'; // withRouter proporciona acceso al historial
 import './login.css'
 import axios from 'axios';
 import Cookies from 'universal-cookie'; 
+import { withRouter } from 'react-router-dom'; //para entrar al historial y hacer la redireccion
+
+
 const cookies = new Cookies();
-
-
 
 
 // API del login
@@ -21,15 +20,16 @@ export const API_FULL_DOMAIN = `${API_PROTOCOL}${API_DOMAIN}${API_ACCESS_TOKEN}`
 export const API_AUTH_DOMAIN = 'http://challenge-react.alkemy.org';
 
 
-
 class Login extends Component{
+
+    
     state={
         form:{
             email:'',
-            password:''
-        }
+            password:'',
+        }       
     }
-
+  
     handleChange = async e => {
         await this.setState({
             form:{
@@ -39,9 +39,13 @@ class Login extends Component{
         });
     }
 
+    
+    
+
     iniciarSesion = async(e) =>{
         e.preventDefault();
 
+        
         const payload = {email: this.state.form.email, password: this.state.form.password};
         console.log(this.state.form);
         await axios.post(API_AUTH_DOMAIN, payload)
@@ -49,10 +53,11 @@ class Login extends Component{
             console.log(response);
             return response.data;
         })
-        .then (response=>{
-            console.log('response', response);
+        .then ((response)=>{
             localStorage.setItem('token', response.token);
-            window.location.href='./welcome';
+            //window.location.pathname = '/welcome';
+            this.props.history.push('/welcome');
+
         })
         .catch(error => {
             alert('el usuario no es correcto');
@@ -70,7 +75,11 @@ class Login extends Component{
     }
     
 
+
     render(){
+        
+        
+        
         return(
             <div>
                 <form onSubmit={this.iniciarSesion} id="login">
